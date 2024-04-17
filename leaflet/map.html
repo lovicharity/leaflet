@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Map</title>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+
+</head>
+<body>
+<style type="text/css">
+	#map {
+		height: 80vh;
+	}
+	
+</style>
+
+
+
+
+
+ <div id="map"></div>
+
+ <div id="coordinate"> </div>
+
+
+
+
+
+
+
+
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+
+    <script
+  src="https://code.jquery.com/jquery-3.7.1.js"
+  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+  crossorigin="anonymous"></script>
+
+
+
+
+     <script type="text/javascript">
+     	//initialize the map
+     	var map = L.map('map').setView([0.0, 38], 7);
+     	//add base map to map
+     	var OpenTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+	maxZoom: 17,
+	attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+}).addTo(map)
+
+
+     	//coordinates on mousemove
+     	map.on("mousemove",function(e){
+     		console.log(e)
+     		$("#coordinate").html(`Lat : ${e.latlng.lat} , Lng : ${e.latlng.lng}`)
+     	})
+
+     	//add scale to map
+     	L.control.scale({position: "bottomright"}).addTo(map)
+
+     	//change controller default position of zoom
+     	map.zoomControl.setPosition("topright")
+       // ADD MARKER TO MAP
+       var marker = L.marker([0.0, 38]).addTo(map);
+     </script>
+</body>
+</html>
